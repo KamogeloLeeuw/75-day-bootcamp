@@ -1,3 +1,4 @@
+import csv
 class Employee:
     def __init__(self, name, department, salary):
         self.name = name
@@ -7,11 +8,11 @@ class Employee:
     def __str__(self):
         return f"{self.name} | {self.department} | R{self.salary:,.2f}"
 
-# annual salary
+    # annual salary
     def annual_salary(self):
         return self.salary * 12
     
-# salary increase
+    # salary increase
     def apply_raise(self, percent):
         self.salary = self.salary * (1 + percent / 100)
         return self.salary
@@ -40,9 +41,8 @@ employees[2].apply_raise(10)
 print(f"\nAfter raise: {employees[2]}")
 
 # export to csv
-import csv
 with open("employees_oop.csv", "w", newline="") as f:
-    writer = csv.DictReader(f, fieldnames=["name", "department", "salary", "annual_salary"])
+    writer = csv.DictWriter(f, fieldnames=["name", "department", "salary", "annual_salary"])
     writer.writeheader()
     for ep in employees:
         writer.writerow(ep.to_dict())
