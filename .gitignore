@@ -7,3 +7,7 @@ venv/
 employees.csv
 employees_oop.csv
 report.txt
+week2/clean_data.csv
+week2/raw_data.csv
+week2/raw_data.xlsm
+week2/transformed_data.csv
