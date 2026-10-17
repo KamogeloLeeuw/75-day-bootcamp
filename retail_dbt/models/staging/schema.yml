@@ -1,0 +1,88 @@
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Cleaned and renamed orders from the retail_shop source"
+    columns:
+      - name: order_id
+        description: "Primary key for orders"
+        data_tests:
+          - not_null
+          - unique
+      - name: customer_id
+        description: "Foreign key to stg_customers"
+        data_tests:
+          - not_null
+          - relationships:
+                arguments:
+                  to: ref('stg_customers')
+                  field: customer_id
+      - name: employee_id
+        description: "Foreign key to stg_employees"
+        data_tests:
+          - not_null
+      - name: status
+        description: "Order status"
+        data_tests:
+          - not_null
+          - accepted_values:
+              values: ['completed', 'pending', 'cancelled']
+
+  - name: stg_customers
+    description: "Cleaned and renamed customers"
+    columns:
+      - name: customer_id
+        description: "Primary key for customers"
+        data_tests:
+          - not_null
+          - unique
+      - name: email
+        description: "Customer email address"
+        data_tests:
+          - not_null
+          - unique
+
+  - name: stg_products
+    description: "Cleaned and renamed products"
+    columns:
+      - name: product_id
+        description: "Primary key for products"
+        data_tests:
+          - not_null
+          - unique
+      - name: price
+        description: "Product price"
+        data_tests:
+          - not_null
+
+  - name: stg_employees
+    description: "Cleaned and renamed employees"
+    columns:
+      - name: employee_id
+        description: "Primary key for employees"
+        data_tests:
+          - not_null
+          - unique
+
+  - name: stg_order_items
+    description: "Cleaned and renamed order items"
+    columns:
+      - name: order_item_id
+        description: "Primary key for order items"
+        data_tests:
+          - not_null
+          - unique
+      - name: order_id
+        description: "Foreign key to stg_orders"
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_orders')
+              field: order_id
+      - name: product_id
+        description: "Foreign key to stg_products"
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_products')
+              field: product_id

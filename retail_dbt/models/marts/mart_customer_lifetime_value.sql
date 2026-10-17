@@ -11,7 +11,7 @@ customer_orders as (
         customer_last_name,
         customer_city,
         count(distinct order_id) as total_orders,
-        sum(line_total) as life_time_value,
+        sum(line_total) as lifetime_value,
         round(avg(line_total), 2) as avg_order_item_value,
         min(order_date) as first_order_date,
         max(order_date) as last_order_date
@@ -20,5 +20,5 @@ customer_orders as (
 )
 
 select * from customer_orders
-order by life_time_value desc
+order by lifetime_value desc
 
