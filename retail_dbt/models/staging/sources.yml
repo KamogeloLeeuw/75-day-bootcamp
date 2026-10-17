@@ -1,0 +1,13 @@
+version: 2
+
+sources:
+  - name: retail_shop
+    database: retail_shop
+    schema: public
+    tables:
+      - name: orders
+      - name: customers
+      - name: products
+      - name: employees
+      - name: categories
+      - name: order_items
